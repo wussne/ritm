@@ -1,0 +1,17 @@
+# Создайте пользователя ritm и выдайте ему /opt/ritm. Проверьте путь: which node
+[Unit]
+Description=Ritm personal planner
+After=network-online.target
+Wants=network-online.target
+[Service]
+Type=simple
+User=ritm
+WorkingDirectory=/opt/ritm
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/node --env-file=.env server/index.js
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+[Install]
+WantedBy=multi-user.target
